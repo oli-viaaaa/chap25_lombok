@@ -23,7 +23,16 @@
 			background-color:gray;
 		}
 	</style>
-
+	<script>
+ <!-- 	게시물 삭제 확인 메소드 -->
+ 	function confirmCheck(no){
+ 		if(confirm('삭제하시겠습니까?'))
+ 			location.href="${contextPath}/boardDelete?no"+no;
+ 		else 
+ 			return false;
+ 		
+ 	}
+	</script>
 </head>
 <body>
 	<h3>게시판 상세 보기 화면</h3>
@@ -49,9 +58,10 @@
 		</tbody>
 	</table>
 	<p class="btn_align">
-		<input type="button" value="글 목록으로 가기" onclick="location.href='boardList'"/>
-		<input type="button" value="글 수정으로 가기" onclick="location.href='boardModify?no=${board.no}'"/>
-		<input type="button" value="삭제하기" onclick="location.href='boardDelete?no=${board.no}'"/>
+		<input type="button" value="글 목록" onclick="location.href='boardList'"/>
+		<input type="button" value="글 수정" onclick="location.href='boardModify?no=${board.no}'"/>
+<%-- 		<input type="button" value="삭제" onclick="if(confirm('삭제하시겠습니까?'))location.href='boardDelete?no=${board.no}'"/> --%>
+		<input type="button" value="삭제" onclick="confrimCheck(${board.no})">
 	</p>
 </body>
 </html>

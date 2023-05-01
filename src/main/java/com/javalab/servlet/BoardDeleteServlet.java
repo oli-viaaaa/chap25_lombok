@@ -1,7 +1,6 @@
 package com.javalab.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,31 +14,28 @@ import com.javalab.dto.BoardModel;
 
 
 /**
- * 게시물 상세보기 서블릿
+ * 게시물 삭제 기능 서블릿
  */
-@WebServlet("/boardView")
-public class BoardViewServlet extends HttpServlet {
+@WebServlet("/boardDelete")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	// 싱글톤으로 만든 boardDao 객체 얻어옴
+	// BoardDao 객체 참조값
 	private BoardDao boardDao = BoardDao.getInstance();
 	
-	
+	// 삭제 기능 처리 doGet 메소드
 	protected void doGet(HttpServletRequest request, 
 						HttpServletResponse response) 
 						throws ServletException, IOException {
-		// boardList.jsp => "get" => parameter no 값을 저장할 객체
+		// boardView.jsp => "get" => parameter no 값을 저장할 객체
 		// 전달되는 parameter 명 : no
 		BoardModel boardModel = new BoardModel();
 		int n = Integer.parseInt(request.getParameter("no"));
 		boardModel.setNo(n);
 		
-		// 게시물 조회수 증가
-		boardDao.updateHit(boardModel);
-		BoardModel boardOne = boardDao.selectOne(boardModel);
-		// 해당 데이터만 조회
-		request.setAttribute("board", boardOne);
-		RequestDispatcher rd = request.getRequestDispatcher("boardView.jsp");
-		rd.forward(request, response);
+		boardDao.delete(boardModel);
+		
+		response.sendRedirect("boardList");
+		
 	}
 }
+

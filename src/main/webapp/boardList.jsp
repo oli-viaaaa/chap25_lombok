@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 본 어플리케이션의 컨텍스트를 경로로 갖고와서 변수에 저장해놓고 아래서 사용한다. -->
-<c:set var="contextPaht" value="${pageContext.request.contextPath}"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 	
 	<style type = "text/css">
 		*{
-			font-size:9px;
+			font-size:9pt;
 		}
 		p{
 			width:600px;
